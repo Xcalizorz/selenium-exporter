@@ -1,0 +1,396 @@
+{
+    "data": {
+        "grid": {
+            "totalSlots": 36,
+            "nodeCount": 12,
+            "maxSession": 36,
+            "sessionCount": 1,
+            "version": "4.5.0 (revision fe167b119a)",
+            "sessionQueueSize": 0
+        },
+        "nodesInfo": {
+            "nodes": [
+                {
+                    "id": "1a5a61a3-9525-4aa7-a309-d03b00c535c1",
+                    "uri": "http:u002fu002f172.28.107.18:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "chrome",
+                                "browserVersion": "106.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "1f2b5f61-f825-41e6-8598-d07b2e7a9ac0",
+                    "uri": "http:u002fu002f172.28.181.236:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "chrome",
+                                "browserVersion": "106.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "4c20139b-ca0f-4fcd-9cfb-eba8ee416dd3",
+                    "uri": "http:u002fu002f172.28.149.166:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "firefox",
+                                "browserVersion": "105.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "fa150de7-e872-4ec7-bdb6-1b22171c96a1",
+                    "uri": "http:u002fu002f172.28.140.233:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "chrome",
+                                "browserVersion": "106.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "0540af00-7b0b-4d23-b70a-513c751d3520",
+                    "uri": "http:u002fu002f172.28.187.98:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "chrome",
+                                "browserVersion": "106.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "dc13cc7d-c302-47ec-9748-fa010948d4a0",
+                    "uri": "http:u002fu002f172.28.6.109:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "firefox",
+                                "browserVersion": "105.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "813e199b-5f75-41ac-b3f0-2978cc6257ba",
+                    "uri": "http:u002fu002f172.28.220.131:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "firefox",
+                                "browserVersion": "105.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "2fcf65b9-91d7-4f8e-9fba-12640758318b",
+                    "uri": "http:u002fu002f172.28.156.198:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "firefox",
+                                "browserVersion": "105.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "7928a3c4-5c1a-4b96-81ce-d44055d16e9e",
+                    "uri": "http:u002fu002f172.28.165.103:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "chrome",
+                                "browserVersion": "106.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "7d53bc52-06d5-44fc-9d24-f8e945f6390e",
+                    "uri": "http:u002fu002f172.28.82.112:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [
+                        {
+                            "id": "3cc79d13-dddd-49f8-9fa7-263c6542d2c4",
+                            "capabilities": {
+                                "acceptInsecureCerts": true,
+                                "browserName": "firefox",
+                                "browserVersion": "105.0.3",
+                                "moz:accessibilityChecks": false,
+                                "moz:buildID": "20221007134813",
+                                "moz:firefoxOptions": {
+                                    "args": [],
+                                    "profile": "UEsDBBQACAgIAARyclUAAAAAAAAAAAAAAAAHAAAAdXNlci5qc51WTWu002fjNhC991cUPrXAmkg2u4e2pzSbAgUWm8UawR4JihxJjCmS5ZBW3Fu002ffoT7Wji1LSXOJZQ+pmffevJmEELgPUP6yKoJr6YmhKKH7rG3FGmFaEYCBFYUBtXr3cykMwq9u002fu002fJQOJ5WIFONdiPlIDcLEun9mFLTTcuG8hdi6sGV1jJ75WmO9X+efvUBcG7BVrOng+48fXx4bEw4gFP1TEEFGUHu002fpgPGWcpEG6FgM6TRd11Bdz1zWwTXAUQbtIwu002fJ8qibfOTmavpFURTICA77YO+MQ5iuZoxWrrXGCUXvsqLKwNauu002fV6D3RBaGanp456S8hHzy3jjlDAL2MMuOmeQQQguSGfRmWO4z8tHXVlnCbUGmgLCpnvEeWYoqec9Qye3yDOvFP0bu002fU0XjoCo6croSDgBMBHIJVXFZRBYz4NmtN0y58FyeI4QrDCZ+TfLrcwa+Jbs9MtaKFTQO3oWUgJxnyzBhKQdLiFEnITtB60avRF7UPfXV5svjmSWdfBhOpi+Ugu002f2u7YkBry+Yppe5B6u002ffaYTK1G4FH8vjLDb1blA+4K4MIYu002fIYGR89Q9T+e5PXtNcFMsa2sdwWiMdMEu002fSYdLssma2erIBoJHiVJxWTizABhBxFC3zOsSs8iTZzW1mKe7eQtG5nZLIVO6Oik5s2071bDkiWBglqAt948U8mbTST733f1seiBT0HEu002fFMGfxE4sRJbaAH1iGIOWkbugK22pG4yW+wspEo8DorztNEAdvQNOPaHu002fXXAPCy05ABvQmtHKCxj6bFj+cpOKRneN+LX78raT+ussfPKaWTxu002f9P5Ae6acIi8Y6aHLqcwemfM2d2VJcbAW3iMjbRN6xZ4rKEUycdrZRqok+oHY6WzP1Tar5bFZqLPINGPYs96kuu002fj3S7GzV4+I3D9+vmU3TBxIOi8va7QfVrP+fkrF2IHzOhqdXgrymR2ssxSEWb9qfpu002fXHOCpm8WzCfYSz6nNX3u002fElkjRfeo7aiNJQNkOr5en9QNJbfHuwtB466zzVYwhiCDrQT9Lm0DDepUzlRou002fyx6pu002fVWafCEcMpUQtJr27TMDO3Wum2kl9DNhPbYhySmmC2vCmMwQe9kN89q1vG8dzWfstofDfCYrSt1EmEUuy2Q6iaMecv1A7dayv+1dvzldXBhHH+9cSxGMtuJ5yiyIpAYayrIGuf3UG9efu002fS9vH5pMKKVzxmJhIkzu8f93fzeuqvKXw2I5OwOOeqmr+I48UkRdaJPVZ3VVR3NhUl7yLD4qmzW0TnbKWuV9NcBJ0YcNKK+3pFSasQsr0KGRTYnJ95vDYTn5D1BLBwj+8V+QzwMAABoNAABQSwECFAAUAAgICAAEcnJVu002fvFfkM8DAAAaDQAABwAAAAAAAAAAAAAAAAAAAAAAdXNlci5qc1BLBQYAAAAAAQABADUAAAAEBAAAAAA="
+                                },
+                                "moz:geckodriverVersion": "0.32.0",
+                                "moz:headless": false,
+                                "moz:platformVersion": "4.18.0-305.62.1.el8_4.x86_64",
+                                "moz:processID": 191046,
+                                "moz:profile": "u002ftmpu002frust_mozprofile9a1Gdf",
+                                "moz:shutdownTimeout": 60000,
+                                "moz:useNonSpecCompliantPointerOrigin": false,
+                                "moz:webdriverClick": true,
+                                "moz:windowless": false,
+                                "pageLoadStrategy": "normal",
+                                "platformName": "LINUX",
+                                "proxy": {},
+                                "se:cdp": "ws:u002fsessionu002f3cc79d13-dddd-49f8-9fa7-263c6542d2c4u002fseu002fcdp",
+                                "se:noVncPort": 7900,
+                                "se:vnc": "ws:u002fsessionu002f3cc79d13-dddd-49f8-9fa7-263c6542d2c4u002fseu002fvnc",
+                                "se:vncEnabled": true,
+                                "se:vncLocalAddress": "ws:u002fu002f172.28.82.112:7900",
+                                "setWindowRect": true,
+                                "strictFileInteractability": false,
+                                "timeouts": {
+                                    "implicit": 0,
+                                    "pageLoad": 300000,
+                                    "script": 30000
+                                },
+                                "unhandledPromptBehavior": "dismiss and notify"
+                            },
+                            "startTime": "18u002f11u002f2022 15: 16: 14",
+                            "uri": "http:u002fu002f172.28.82.112: 5555",
+                            "nodeId": "7d53bc52-06d5-44fc-9d24-f8e945f6390e",
+                            "nodeUri": "http:u002fu002f172.28.82.112:5555",
+                            "sessionDurationMillis": "210148",
+                            "slot": {
+                                "id": "314f804d-3945-482f-9a82-e67bbdcee53d",
+                                "stereotype": {
+                                    "browserName": "firefox",
+                                    "browserVersion": "105.0",
+                                    "platformName": "LINUX",
+                                    "se:noVncPort": 7900,
+                                    "se:vncEnabled": true
+                                },
+                                "lastStarted": "18u002f11u002f2022 15: 16: 14"
+                            }
+                        }
+                    ],
+                    "sessionCount": 1,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "firefox",
+                                "browserVersion": "105.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "b09e9cdf-d328-45c1-b2b6-de85400bc293",
+                    "uri": "http:u002fu002f172.28.217.223:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "firefox",
+                                "browserVersion": "105.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                },
+                {
+                    "id": "6ba4e9a3-018d-4260-b237-0438a832f85e",
+                    "uri": "http:u002fu002f172.28.162.110:5555",
+                    "status": "UP",
+                    "maxSession": 3,
+                    "slotCount": 3,
+                    "sessions": [],
+                    "sessionCount": 0,
+                    "stereotypes": [
+                        {
+                            "slots": 3,
+                            "stereotype": {
+                                "browserName": "chrome",
+                                "browserVersion": "106.0",
+                                "platformName": "LINUX",
+                                "se:noVncPort": 7900,
+                                "se:vncEnabled": true
+                            }
+                        }
+                    ],
+                    "version": "4.5.0 (revision fe167b119a)",
+                    "osInfo": {
+                        "arch": "amd64",
+                        "name": "Linux",
+                        "version": "4.18.0-305.62.1.el8_4.x86_64"
+                    }
+                }
+            ]
+        }
+    }
+}
