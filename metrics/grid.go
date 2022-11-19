@@ -23,16 +23,21 @@ type GridExporter struct {
 }
 
 type Body struct {
-	Data Data `json:"data"`
-}
+	Data struct {
+		Grid struct {
+			Uri              string `json:"-"`
+			MaxSession       int64  `json:"maxSession"`
+			SessionCount     int64  `json:"sessionCount"`
+			TotalSlots       int64  `json:"totalSlots"`
+			NodeCount        int64  `json:"nodeCount"`
+			Version          string `json:"version"`
+			SessionQueueSize int64  `json:"sessionQueueSize"`
+		} `json:"grid"`
 
-type Data struct {
-	Grid      Grid      `json:"grid"`
-	NodesInfo NodesInfo `json:"nodesInfo"`
-}
-
-type NodesInfo struct {
-	Nodes []Node `json:"nodes"`
+		NodesInfo struct {
+			Nodes []Node `json:"nodes"`
+		} `json:"nodesInfo"`
+	} `json:"data"`
 }
 
 type Node struct {
@@ -44,14 +49,12 @@ type Node struct {
 	SessionCount int64     `json:"sessionCount"`
 	Stereotypes  string    `json:"stereotypes"`
 	Version      string    `json:"version"`
-	OsInfo       OsInfo    `json:"osInfo"`
 	Sessions     []Session `json:"sessions"`
-}
-
-type OsInfo struct {
-	Arch    string `json:"arch"`
-	Name    string `json:"name"`
-	Version string `json:"version"`
+	OsInfo       struct {
+		Arch    string `json:"arch"`
+		Name    string `json:"name"`
+		Version string `json:"version"`
+	} `json:"osInfo"`
 }
 
 type Session struct {
@@ -62,23 +65,11 @@ type Session struct {
 	NodeId                string `json:"nodeId"`
 	NodeUri               string `json:"nodeUri"`
 	SessionDurationMillis string `json:"sessionDurationMillis"`
-	Slot                  Slot   `json:"slot"`
-}
-
-type Slot struct {
-	Id          string `json:"id"`
-	Stereotype  string `json:"sterotype"`
-	LastStarted string `json:"lastStarted"`
-}
-
-type Grid struct {
-	Uri              string `json:"-"`
-	MaxSession       int64  `json:"maxSession"`
-	SessionCount     int64  `json:"sessionCount"`
-	TotalSlots       int64  `json:"totalSlots"`
-	NodeCount        int64  `json:"nodeCount"`
-	Version          string `json:"version"`
-	SessionQueueSize int64  `json:"sessionQueueSize"`
+	Slot                  struct {
+		Id          string `json:"id"`
+		Stereotype  string `json:"sterotype"`
+		LastStarted string `json:"lastStarted"`
+	} `json:"slot"`
 }
 
 func NewGridExporter(l *logrus.Logger, reg prometheus.Registerer) *GridExporter {
@@ -201,7 +192,6 @@ func (e *GridExporter) fetch(uri string) error {
 		e.l.Errorf("Can not unmarshal response body", resp.Body)
 		return err
 	}
-	defer resp.Body.Close()
 
 	e.maxSession.Set(float64(jsonBody.Data.Grid.MaxSession))
 	e.sessionCount.Set(float64(jsonBody.Data.Grid.SessionCount))
