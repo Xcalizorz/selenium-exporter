@@ -1,9 +1,12 @@
 package main
 
 import (
+	"flag"
 	"net/http"
+	"net/url"
 	"os"
 	"os/signal"
+	"strconv"
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -17,14 +20,48 @@ import (
 	"github.com/xcalizorz/selenium-exporter/metrics"
 )
 
+type exporterFlags struct {
+	publishAddr string
+	seleniumUri string
+	version     int
+}
+
+func setFlags(l *logrus.Logger) exporterFlags {
+	var result exporterFlags
+
+	flag.StringVar(&result.publishAddr, "addr", ":8081", "The publish address of this exporter")
+	flag.StringVar(&result.seleniumUri, "uri", "", "The URL to your Selenium deployment")
+	flag.IntVar(&result.version, "version", 4, "The major version of your Selenium deployment [3, 4]")
+	flag.Parse()
+
+	checkUrl(l, result.seleniumUri)
+	if result.seleniumUri != "" {
+		os.Setenv("SE_NODE_GRID_URL", result.seleniumUri)
+	}
+	if os.Getenv("SE_NODE_GRID_URL") == "" {
+		l.Fatal("Provide the URL to your Selenium deployment either via '-uri' or via env. variable 'SE_NODE_GRID_URL'")
+		os.Exit(1)
+	}
+	os.Setenv("SE_NODE_GRID_VERSION", strconv.Itoa(result.version))
+
+	return result
+}
+
+func checkUrl(l *logrus.Logger, uri string) {
+	_, err := url.ParseRequestURI(uri)
+	if err != nil {
+		l.Fatal(err)
+	}
+}
+
 func main() {
-	addr := "127.0.0.1:8080"
 	l := &logrus.Logger{
 		Out:       os.Stdout,
 		Formatter: new(logrus.TextFormatter),
 		Hooks:     make(logrus.LevelHooks),
 		Level:     logrus.DebugLevel,
 	}
+	f := setFlags(l)
 
 	sm := http.NewServeMux()
 
@@ -38,7 +75,7 @@ func main() {
 	sm.Handle("/metrics", gridExporter.Serve(promhttp.Handler()))
 
 	s := &http.Server{
-		Addr:    addr,
+		Addr:    f.publishAddr,
 		Handler: sm,
 		// ErrorLog:     l,
 		ReadTimeout:  time.Second * 5,
@@ -48,7 +85,7 @@ func main() {
 
 	// start the server
 	go func() {
-		l.Infoln("Starting server @", addr)
+		l.Infoln("Starting server @", f.publishAddr)
 
 		err := s.ListenAndServe()
 		if err != nil {
