@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/collectors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
@@ -27,12 +28,14 @@ func main() {
 
 	sm := http.NewServeMux()
 
-	reg := prometheus.NewRegistry()
-	gridExporter := metrics.NewGridExporter(l, reg)
+	gridExporter := metrics.NewGridExporter(l)
+
+	prometheus.Unregister(collectors.NewGoCollector())
+	prometheus.Unregister(collectors.NewProcessCollector(collectors.ProcessCollectorOpts{}))
 
 	sm.Handle("/", handlers.NewIndex(l))
 	sm.Handle("/status", handlers.NewStatus(l))
-	sm.Handle("/metrics", gridExporter.Serve(promhttp.HandlerFor(reg, promhttp.HandlerOpts{Registry: reg})))
+	sm.Handle("/metrics", gridExporter.Serve(promhttp.Handler()))
 
 	s := &http.Server{
 		Addr:    addr,

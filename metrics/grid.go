@@ -72,7 +72,7 @@ type Session struct {
 	} `json:"slot"`
 }
 
-func NewGridExporter(l *logrus.Logger, reg prometheus.Registerer) *GridExporter {
+func NewGridExporter(l *logrus.Logger) *GridExporter {
 	e := &GridExporter{
 		l: l,
 		maxSession: promauto.NewGauge(prometheus.GaugeOpts{
@@ -103,12 +103,6 @@ func NewGridExporter(l *logrus.Logger, reg prometheus.Registerer) *GridExporter 
 			[]string{"version"},
 		),
 	}
-	reg.MustRegister(e.maxSession)
-	reg.MustRegister(e.sessionCount)
-	reg.MustRegister(e.totalSlots)
-	reg.MustRegister(e.nodeCount)
-	reg.MustRegister(e.sessionQueueSize)
-	reg.MustRegister(e.version)
 	return e
 }
 
