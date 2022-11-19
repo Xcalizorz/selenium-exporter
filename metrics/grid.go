@@ -3,8 +3,9 @@ package metrics
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -122,7 +123,13 @@ func NewGridExporter(l *logrus.Logger, reg prometheus.Registerer) *GridExporter 
 
 func (e *GridExporter) Serve(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		e.fetch("https://mykn-shared-selenium-4.apps.emea.ocp.int.kn/graphql")
+		uri := fmt.Sprintf("%s/graphql", os.Getenv("SE_NODE_GRID_URL"))
+		err := e.fetch(uri)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
 		h.ServeHTTP(w, r)
 	})
 }
@@ -187,21 +194,14 @@ func (e *GridExporter) fetch(uri string) error {
 		return err
 	}
 
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	// e.l.Debugf("%s", body)
-
-	if resp.StatusCode >= 400 {
-		e.l.Errorf("Unable to get data from Selenium @ %s: %s", uri, body)
-	}
-
+	decoder := json.NewDecoder(resp.Body)
+	jsonBody := Body{}
+	err = decoder.Decode(&jsonBody)
 	if err != nil {
-		e.l.Errorf(`Unable to parse response from Selenium "%s": %s`, body, err)
+		e.l.Errorf("Can not unmarshal response body", resp.Body)
 		return err
 	}
-
-	var jsonBody Body
-	json.Unmarshal(body, &jsonBody)
+	defer resp.Body.Close()
 
 	e.maxSession.Set(float64(jsonBody.Data.Grid.MaxSession))
 	e.sessionCount.Set(float64(jsonBody.Data.Grid.SessionCount))
