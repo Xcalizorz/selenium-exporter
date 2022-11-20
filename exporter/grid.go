@@ -1,25 +1,21 @@
-package metrics
+package exporter
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"net/http"
-	"os"
+	"log"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/sirupsen/logrus"
 )
 
 type GridExporter struct {
-	l                *logrus.Logger
-	maxSession       prometheus.Gauge
-	sessionCount     prometheus.Gauge
-	totalSlots       prometheus.Gauge
-	nodeCount        prometheus.Gauge
-	sessionQueueSize prometheus.Gauge
-	version          *prometheus.GaugeVec
+	l                    *log.Logger
+	maxSession           prometheus.Gauge
+	sessionCount         prometheus.Gauge
+	totalSlots           prometheus.Gauge
+	nodeCount            prometheus.Gauge
+	sessionQueueSize     prometheus.Gauge
+	version              *prometheus.GaugeVec
+	sessionQueueRequests prometheus.Gauge
 }
 
 type Body struct {
@@ -33,6 +29,11 @@ type Body struct {
 			Version          string `json:"version"`
 			SessionQueueSize int64  `json:"sessionQueueSize"`
 		} `json:"grid"`
+
+		SessionInfo struct {
+			SessionQueueRequests int64     `json:"sessionQueueRequests"`
+			Sessions             []Session `json:"sessions"`
+		} `json:"sessionInfo"`
 
 		NodesInfo struct {
 			Nodes []Node `json:"nodes"`
@@ -72,7 +73,7 @@ type Session struct {
 	} `json:"slot"`
 }
 
-func NewGridExporter(l *logrus.Logger) *GridExporter {
+func NewGridExporter(l *log.Logger) *GridExporter {
 	e := &GridExporter{
 		l: l,
 		maxSession: promauto.NewGauge(prometheus.GaugeOpts{
@@ -95,6 +96,10 @@ func NewGridExporter(l *logrus.Logger) *GridExporter {
 			Name: "selenium_grid_session_queue_size",
 			Help: "size of the session queue",
 		}),
+		sessionQueueRequests: promauto.NewGauge(prometheus.GaugeOpts{
+			Name: "selenium_grid_session_queue_requests",
+			Help: "number of requests in the session queue",
+		}),
 		version: promauto.NewGaugeVec(
 			prometheus.GaugeOpts{
 				Name: "selenium_grid_version",
@@ -106,93 +111,13 @@ func NewGridExporter(l *logrus.Logger) *GridExporter {
 	return e
 }
 
-func (e *GridExporter) Serve(h http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		uri := fmt.Sprintf("%s/graphql", os.Getenv("SE_NODE_GRID_URL"))
-		err := e.fetch(uri)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
+func (e *GridExporter) SetMetrics(b Body) {
+	e.maxSession.Set(float64(b.Data.Grid.MaxSession))
+	e.sessionCount.Set(float64(b.Data.Grid.SessionCount))
+	e.nodeCount.Set(float64(b.Data.Grid.NodeCount))
+	e.sessionQueueSize.Set(float64(b.Data.Grid.SessionQueueSize))
+	e.totalSlots.Set(float64(b.Data.Grid.TotalSlots))
+	e.version.WithLabelValues(b.Data.Grid.Version).Set(float64(1))
 
-		h.ServeHTTP(w, r)
-	})
-}
-
-func (e *GridExporter) fetch(uri string) error {
-	e.l.Infoln("Fetching data from", uri)
-
-	jsonData := map[string]string{
-		"query": `
-            { 
-                grid {
-					uri,
-					totalSlots,
-					nodeCount,
-					maxSession,
-					sessionCount,
-					version,
-					sessionQueueSize
-                }
-				nodesInfo {
-					nodes{
-						id,
-						uri,
-						status,
-						maxSession,
-						slotCount,
-						sessions {
-								id,
-								capabilities,
-								startTime,
-								uri,
-								nodeId,
-								nodeUri,
-								sessionDurationMillis
-								slot {
-									id,
-									stereotype,
-									lastStarted
-								}
-						},
-						sessionCount,
-						stereotypes,
-						version,
-						osInfo {
-							arch,
-							name,
-							version
-						}
-					}
-				}
-            }
-        `,
-	}
-	jsonValue, _ := json.Marshal(jsonData)
-
-	req, err := http.NewRequest(http.MethodPost, uri, bytes.NewBuffer(jsonValue))
-	req.Header.Add("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		e.l.Errorf("Unable to get data from Selenium @ %s: %s", uri, err)
-		return err
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	jsonBody := Body{}
-	err = decoder.Decode(&jsonBody)
-	if err != nil {
-		e.l.Errorf("Can not unmarshal response body", resp.Body)
-		return err
-	}
-
-	e.maxSession.Set(float64(jsonBody.Data.Grid.MaxSession))
-	e.sessionCount.Set(float64(jsonBody.Data.Grid.SessionCount))
-	e.nodeCount.Set(float64(jsonBody.Data.Grid.NodeCount))
-	e.sessionQueueSize.Set(float64(jsonBody.Data.Grid.SessionQueueSize))
-	e.totalSlots.Set(float64(jsonBody.Data.Grid.TotalSlots))
-	e.version.WithLabelValues(jsonBody.Data.Grid.Version).Set(float64(1))
-
-	return nil
+	e.sessionQueueRequests.Set(float64(b.Data.SessionInfo.SessionQueueRequests))
 }

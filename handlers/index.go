@@ -1,16 +1,15 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
-
-	"github.com/sirupsen/logrus"
 )
 
 type Index struct {
-	l *logrus.Logger
+	l *log.Logger
 }
 
-func NewIndex(l *logrus.Logger) *Index {
+func NewIndex(l *log.Logger) *Index {
 	return &Index{l}
 }
 

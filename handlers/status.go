@@ -2,16 +2,15 @@ package handlers
 
 import (
 	"io"
+	"log"
 	"net/http"
-
-	"github.com/sirupsen/logrus"
 )
 
 type Hello struct {
-	l *logrus.Logger
+	l *log.Logger
 }
 
-func NewStatus(l *logrus.Logger) *Hello {
+func NewStatus(l *log.Logger) *Hello {
 	return &Hello{l}
 }
 
